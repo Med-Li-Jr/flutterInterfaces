@@ -1,24 +1,22 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_interfaces/CustomColor.dart';
 import 'package:flutter_interfaces/CustomField.dart';
 import 'package:flutter_interfaces/DatabaseFB.dart';
+import 'package:flutter_interfaces/GuestBook.dart';
 import 'package:flutter_interfaces/Validator.dart';
 
 class EditItemForm extends StatefulWidget {
-  final FocusNode titleFocusNode;
+  final FocusNode nameFocusNode;
   final FocusNode descriptionFocusNode;
-  final String currentTitle;
-  final String currentDescription;
-  final String documentId;
+  final Guestbook currentGuestbook;
 
   const EditItemForm({
-    @required this.titleFocusNode,
+    @required this.nameFocusNode,
     @required this.descriptionFocusNode,
-    @required this.currentTitle,
-    @required this.currentDescription,
-    @required this.documentId,
-  });
+    @required this.currentGuestbook}
+    );
 
   @override
   _EditItemFormState createState() => _EditItemFormState();
@@ -29,17 +27,17 @@ class _EditItemFormState extends State<EditItemForm> {
 
   bool _isProcessing = false;
 
-   TextEditingController _titleController;
+   TextEditingController _nameController;
    TextEditingController _descriptionController;
 
   @override
   void initState() {
-    _titleController = TextEditingController(
-      text: widget.currentTitle,
+    _nameController = TextEditingController(
+      text: widget.currentGuestbook.name,
     );
 
     _descriptionController = TextEditingController(
-      text: widget.currentDescription,
+      text: widget.currentGuestbook.text,
     );
     super.initState();
   }
@@ -61,7 +59,7 @@ class _EditItemFormState extends State<EditItemForm> {
               children: [
                 SizedBox(height: 24.0),
                 Text(
-                  'Title',
+                  'Name',
                   style: TextStyle(
                     color: CustomColors.firebaseGrey,
                     fontSize: 22.0,
@@ -72,15 +70,15 @@ class _EditItemFormState extends State<EditItemForm> {
                 SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _titleController,
-                  focusNode: widget.titleFocusNode,
+                  controller: _nameController,
+                  focusNode: widget.nameFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.next,
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Title',
-                  hint: 'Enter your note title',
+                  label: 'Name',
+                  hint: 'Enter your note name',
                 ),
                 SizedBox(height: 24.0),
                 Text(
@@ -132,7 +130,7 @@ class _EditItemFormState extends State<EditItemForm> {
                       ),
                     ),
                     onPressed: () async {
-                      widget.titleFocusNode.unfocus();
+                      widget.nameFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
 
                       if (_editItemFormKey.currentState.validate()) {
@@ -140,11 +138,10 @@ class _EditItemFormState extends State<EditItemForm> {
                           _isProcessing = true;
                         });
 
-                        await Database.updateItem(
-                          docId: widget.documentId,
-                          title: _titleController.text,
-                          description: _descriptionController.text,
-                        );
+                        widget.currentGuestbook.name =  _nameController.text;
+                        widget.currentGuestbook.text =  _descriptionController.text;
+                        widget.currentGuestbook.timestamp = Timestamp.now().toString();
+                        await Database.updateItem(widget.currentGuestbook);
 
                         setState(() {
                           _isProcessing = false;

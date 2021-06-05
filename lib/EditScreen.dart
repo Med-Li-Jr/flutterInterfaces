@@ -4,16 +4,13 @@ import 'package:flutter_interfaces/AppBarTitle.dart';
 import 'package:flutter_interfaces/CustomColor.dart';
 import 'package:flutter_interfaces/DatabaseFB.dart';
 import 'package:flutter_interfaces/EditForm.dart';
+import 'package:flutter_interfaces/GuestBook.dart';
 
 class EditScreen extends StatefulWidget {
-  final String currentTitle;
-  final String currentDescription;
-  final String documentId;
+  final Guestbook currentGuestBook;
 
   EditScreen({
-    @required this.currentTitle,
-    @required this.currentDescription,
-    @required this.documentId,
+    @required this.currentGuestBook,
   });
 
   @override
@@ -21,7 +18,7 @@ class EditScreen extends StatefulWidget {
 }
 
 class _EditScreenState extends State<EditScreen> {
-  final FocusNode _titleFocusNode = FocusNode();
+  final FocusNode _nameFocusNode = FocusNode();
 
   final FocusNode _descriptionFocusNode = FocusNode();
 
@@ -31,7 +28,7 @@ class _EditScreenState extends State<EditScreen> {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        _titleFocusNode.unfocus();
+        _nameFocusNode.unfocus();
         _descriptionFocusNode.unfocus();
       },
       child: Scaffold(
@@ -67,7 +64,7 @@ class _EditScreenState extends State<EditScreen> {
                       });
 
                       await Database.deleteItem(
-                        docId: widget.documentId,
+                        guestbookId: widget.currentGuestBook.bookId,
                       );
 
                       setState(() {
@@ -87,11 +84,9 @@ class _EditScreenState extends State<EditScreen> {
               bottom: 20.0,
             ),
             child: EditItemForm(
-              documentId: widget.documentId,
-              titleFocusNode: _titleFocusNode,
+              nameFocusNode: _nameFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
-              currentTitle: widget.currentTitle,
-              currentDescription: widget.currentDescription,
+              currentGuestbook: widget.currentGuestBook,
             ),
           ),
         ),

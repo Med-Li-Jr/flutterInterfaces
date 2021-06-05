@@ -1,8 +1,9 @@
-
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_interfaces/CustomColor.dart';
 import 'package:flutter_interfaces/CustomField.dart';
 import 'package:flutter_interfaces/DatabaseFB.dart';
+import 'package:flutter_interfaces/GuestBook.dart';
 import 'package:flutter_interfaces/Validator.dart';
 
 class AddItemForm extends StatefulWidget {
@@ -123,8 +124,11 @@ class _AddItemFormState extends State<AddItemForm> {
                         });
 
                         await Database.addItem(
-                          title: _titleController.text,
-                          description: _descriptionController.text,
+                          Guestbook(
+                              userId: "sdf6s51se65",
+                              timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
+                              text: _titleController.text,
+                              name: _descriptionController.text),
                         );
 
                         setState(() {
