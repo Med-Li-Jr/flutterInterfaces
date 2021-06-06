@@ -11,21 +11,15 @@ class AppBarTitle extends StatelessWidget {
       children: [
         Image.asset(
           'images/owl-2.jpg',
-          height: 20,
+          height: 30,
         ),
         SizedBox(width: 8),
         Text(
-          'FlutterFire',
+          'FlutterFire CRUD',
           style: TextStyle(
-            color: CustomColors.firebaseYellow,
-            fontSize: 18,
-          ),
-        ),
-        Text(
-          ' CRUD',
-          style: TextStyle(
-            color: CustomColors.firebaseOrange,
-            fontSize: 18,
+            // color: CustomColors.primaryColor,
+            color: CustomColors.thirdColor,
+            fontSize: 28,
           ),
         ),
       ],

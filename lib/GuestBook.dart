@@ -1,31 +1,47 @@
-
 import 'package:flutter/material.dart';
 
 class Guestbook {
-   String bookId;
-   String userId;
-   String timestamp;
-   String text;
-   String name;
+  String bookId;
+  String userId;
+  String timestamp;
+  String description;
+  String name;
+  double dataDouble;
+  int dataInt;
+  bool dataBool;
 
-  Guestbook({this.bookId, @required this.userId, @required this.timestamp, @required this.text, @required this.name});
+  Guestbook(
+      {this.bookId,
+      @required this.userId,
+      @required this.timestamp,
+      @required this.description,
+      @required this.name,
+      @required this.dataDouble,
+      @required this.dataInt,
+      @required this.dataBool});
 
-  factory Guestbook.fromJson(Map<String, dynamic> json){
-    return Guestbook(  
+  factory Guestbook.fromJson(Map<String, dynamic> json) {
+    return Guestbook(
       userId: json['userId'],
       timestamp: json['timestamp'],
-      text: json['text'],
-      name: json['name']
+      description: json['description'],
+      name: json['name'],
+      dataDouble: json['dataDouble'],
+      dataInt: json['dataInt'],
+      dataBool: json['dataBool'],
     );
   }
 
-  Map<String,dynamic> toMap(){
+  Map<String, dynamic> toMap() {
     return {
       'bookId': bookId,
       'userId': userId,
-      'timestamp':timestamp,
-      'text':text,
-      'name':name
+      'timestamp': timestamp,
+      'description': description,
+      'name': name,
+      'dataDouble': dataDouble,
+      'dataInt': dataInt,
+      'dataBool': dataBool
     };
   }
 }

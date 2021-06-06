@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_interfaces/AddScreen.dart';
 import 'package:flutter_interfaces/AppBarTitle.dart';
@@ -11,17 +10,15 @@ class DashboardScreen extends StatefulWidget {
 }
 
 class _DashboardScreenState extends State<DashboardScreen> {
-  final FocusNode _nameFocusNode = FocusNode();
-  final FocusNode _emailFocusNode = FocusNode();
-  final FocusNode _passwordFocusNode = FocusNode();
+  
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: CustomColors.firebaseNavy,
+      backgroundColor: CustomColors.primaryColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: CustomColors.firebaseNavy,
+        backgroundColor: CustomColors.secondColor,
         title: AppBarTitle(),
       ),
       floatingActionButton: FloatingActionButton(
@@ -32,21 +29,50 @@ class _DashboardScreenState extends State<DashboardScreen> {
             ),
           );
         },
-        backgroundColor: CustomColors.firebaseOrange,
+        backgroundColor: CustomColors.secondColor,
         child: Icon(
           Icons.add,
-          color: Colors.white,
+          color: CustomColors.thirdColor,
           size: 32,
         ),
       ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.only(
+            top: 15,
             left: 16.0,
             right: 16.0,
             bottom: 20.0,
           ),
-          child: ItemList(),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              SizedBox(
+                child: Row(
+                  children: [
+                    Text(
+                      'Home > ',
+                      style: TextStyle(
+                        // color: CustomColors.primaryColor,
+                        color: CustomColors.thirdColor,
+                        fontSize: 17,
+                      ),
+                    ),
+                    Text(
+                      'Books',
+                      style: TextStyle(
+                        // color: CustomColors.primaryColor,
+                        color: CustomColors.secondColor,
+                        fontSize: 17,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              SizedBox(height: 15),
+              Expanded(child: ItemList()),
+            ],
+          ),
         ),
       ),
     );

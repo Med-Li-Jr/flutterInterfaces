@@ -7,12 +7,18 @@ import 'package:flutter_interfaces/GuestBook.dart';
 import 'package:flutter_interfaces/Validator.dart';
 
 class AddItemForm extends StatefulWidget {
-  final FocusNode titleFocusNode;
+  final FocusNode nameFocusNode;
   final FocusNode descriptionFocusNode;
+  final FocusNode dataDoubleFocusNode;
+  final FocusNode dataIntFocusNode;
+  final FocusNode dataBoolFocusNode;
 
   const AddItemForm({
-    @required this.titleFocusNode,
+    @required this.nameFocusNode,
     @required this.descriptionFocusNode,
+    @required this.dataDoubleFocusNode,
+    @required this.dataIntFocusNode,
+    @required this.dataBoolFocusNode,
   });
 
   @override
@@ -24,8 +30,11 @@ class _AddItemFormState extends State<AddItemForm> {
 
   bool _isProcessing = false;
 
-  final TextEditingController _titleController = TextEditingController();
+  final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
+  final TextEditingController _dataDoubleController = TextEditingController();
+  final TextEditingController _dataIntController = TextEditingController();
+  final TextEditingController _dataBoolController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -42,11 +51,10 @@ class _AddItemFormState extends State<AddItemForm> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                SizedBox(height: 24.0),
                 Text(
-                  'Title',
+                  'Name',
                   style: TextStyle(
-                    color: CustomColors.firebaseGrey,
+                    color: CustomColors.itemListColor,
                     fontSize: 22.0,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
@@ -55,21 +63,21 @@ class _AddItemFormState extends State<AddItemForm> {
                 SizedBox(height: 8.0),
                 CustomFormField(
                   isLabelEnabled: false,
-                  controller: _titleController,
-                  focusNode: widget.titleFocusNode,
+                  controller: _nameController,
+                  focusNode: widget.nameFocusNode,
                   keyboardType: TextInputType.text,
                   inputAction: TextInputAction.next,
                   validator: (value) => Validator.validateField(
                     value: value,
                   ),
-                  label: 'Title',
-                  hint: 'Enter your note title',
+                  label: 'Name',
+                  hint: 'Enter your note name',
                 ),
                 SizedBox(height: 24.0),
                 Text(
                   'Description',
                   style: TextStyle(
-                    color: CustomColors.firebaseGrey,
+                    color: CustomColors.itemListColor,
                     fontSize: 22.0,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
@@ -77,7 +85,7 @@ class _AddItemFormState extends State<AddItemForm> {
                 ),
                 SizedBox(height: 8.0),
                 CustomFormField(
-                  maxLines: 10,
+                  maxLines: 1,
                   isLabelEnabled: false,
                   controller: _descriptionController,
                   focusNode: widget.descriptionFocusNode,
@@ -89,6 +97,78 @@ class _AddItemFormState extends State<AddItemForm> {
                   label: 'Description',
                   hint: 'Enter your note description',
                 ),
+                SizedBox(height: 24.0),
+                Text(
+                  'dataDouble',
+                  style: TextStyle(
+                    color: CustomColors.itemListColor,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  maxLines: 1,
+                  isLabelEnabled: false,
+                  controller: _dataDoubleController,
+                  focusNode: widget.dataDoubleFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Data Double',
+                  hint: 'Enter your note data double',
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  'dataInt',
+                  style: TextStyle(
+                    color: CustomColors.itemListColor,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  maxLines: 1,
+                  isLabelEnabled: false,
+                  controller: _dataIntController,
+                  focusNode: widget.dataIntFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Data Int',
+                  hint: 'Enter your note data int',
+                ),
+                SizedBox(height: 24.0),
+                Text(
+                  'dataBool',
+                  style: TextStyle(
+                    color: CustomColors.itemListColor,
+                    fontSize: 22.0,
+                    letterSpacing: 1,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                SizedBox(height: 8.0),
+                CustomFormField(
+                  maxLines: 1,
+                  isLabelEnabled: false,
+                  controller: _dataBoolController,
+                  focusNode: widget.dataBoolFocusNode,
+                  keyboardType: TextInputType.text,
+                  inputAction: TextInputAction.done,
+                  validator: (value) => Validator.validateField(
+                    value: value,
+                  ),
+                  label: 'Data Bool',
+                  hint: 'Enter your note data bool',
+                ),
               ],
             ),
           ),
@@ -97,7 +177,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   padding: const EdgeInsets.all(16.0),
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      CustomColors.firebaseOrange,
+                      CustomColors.secondColor,
                     ),
                   ),
                 )
@@ -106,7 +186,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        CustomColors.firebaseOrange,
+                        CustomColors.secondColor,
                       ),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
@@ -115,8 +195,11 @@ class _AddItemFormState extends State<AddItemForm> {
                       ),
                     ),
                     onPressed: () async {
-                      widget.titleFocusNode.unfocus();
+                      widget.nameFocusNode.unfocus();
                       widget.descriptionFocusNode.unfocus();
+                      widget.dataDoubleFocusNode.unfocus();
+                      widget.dataIntFocusNode.unfocus();
+                      widget.dataBoolFocusNode.unfocus();
 
                       if (_addItemFormKey.currentState.validate()) {
                         setState(() {
@@ -125,10 +208,16 @@ class _AddItemFormState extends State<AddItemForm> {
 
                         await Database.addItem(
                           Guestbook(
-                              userId: "sdf6s51se65",
-                              timestamp: DateTime.now().millisecondsSinceEpoch.toString(),
-                              text: _titleController.text,
-                              name: _descriptionController.text),
+                            userId: "sdf6s51se65",
+                            timestamp: DateTime.now()
+                                .millisecondsSinceEpoch
+                                .toString(),
+                            name: _nameController.text,
+                            description: _descriptionController.text,
+                            dataDouble: double.parse(_dataBoolController.text),
+                            dataInt: int.parse(_dataIntController.text),
+                            dataBool: _dataBoolController.text == "true",
+                          ),
                         );
 
                         setState(() {
@@ -145,7 +234,7 @@ class _AddItemFormState extends State<AddItemForm> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: CustomColors.firebaseGrey,
+                          color: CustomColors.itemListColor,
                           letterSpacing: 2,
                         ),
                       ),

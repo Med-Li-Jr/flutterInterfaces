@@ -37,7 +37,7 @@ class _EditItemFormState extends State<EditItemForm> {
     );
 
     _descriptionController = TextEditingController(
-      text: widget.currentGuestbook.text,
+      text: widget.currentGuestbook.description,
     );
     super.initState();
   }
@@ -61,7 +61,7 @@ class _EditItemFormState extends State<EditItemForm> {
                 Text(
                   'Name',
                   style: TextStyle(
-                    color: CustomColors.firebaseGrey,
+                    color: CustomColors.itemListColor,
                     fontSize: 22.0,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
@@ -84,7 +84,7 @@ class _EditItemFormState extends State<EditItemForm> {
                 Text(
                   'Description',
                   style: TextStyle(
-                    color: CustomColors.firebaseGrey,
+                    color: CustomColors.itemListColor,
                     fontSize: 22.0,
                     letterSpacing: 1,
                     fontWeight: FontWeight.bold,
@@ -112,7 +112,7 @@ class _EditItemFormState extends State<EditItemForm> {
                   padding: const EdgeInsets.all(16.0),
                   child: CircularProgressIndicator(
                     valueColor: AlwaysStoppedAnimation<Color>(
-                      CustomColors.firebaseOrange,
+                      CustomColors.secondColor,
                     ),
                   ),
                 )
@@ -121,7 +121,7 @@ class _EditItemFormState extends State<EditItemForm> {
                   child: ElevatedButton(
                     style: ButtonStyle(
                       backgroundColor: MaterialStateProperty.all(
-                        CustomColors.firebaseOrange,
+                        CustomColors.secondColor,
                       ),
                       shape: MaterialStateProperty.all(
                         RoundedRectangleBorder(
@@ -139,7 +139,7 @@ class _EditItemFormState extends State<EditItemForm> {
                         });
 
                         widget.currentGuestbook.name =  _nameController.text;
-                        widget.currentGuestbook.text =  _descriptionController.text;
+                        widget.currentGuestbook.description =  _descriptionController.text;
                         widget.currentGuestbook.timestamp = Timestamp.now().toString();
                         await Database.updateItem(widget.currentGuestbook);
 
@@ -157,7 +157,7 @@ class _EditItemFormState extends State<EditItemForm> {
                         style: TextStyle(
                           fontSize: 24,
                           fontWeight: FontWeight.bold,
-                          color: CustomColors.firebaseGrey,
+                          color: CustomColors.itemListColor,
                           letterSpacing: 2,
                         ),
                       ),

@@ -48,14 +48,14 @@ class CustomFormField extends StatelessWidget {
       textCapitalization:
           isCapitalized ? TextCapitalization.words : TextCapitalization.none,
       textInputAction: _inputAction,
-      cursorColor: CustomColors.firebaseYellow,
+      cursorColor: CustomColors.mColorYellow,
       validator: (value) => _validator(value),
       decoration: InputDecoration(
         labelText: isLabelEnabled ? _label : null,
-        labelStyle: TextStyle(color: CustomColors.firebaseYellow),
+        labelStyle: TextStyle(color: CustomColors.mColorYellow),
         hintText: _hint,
         hintStyle: TextStyle(
-          color: CustomColors.firebaseGrey.withOpacity(0.5),
+          color: CustomColors.itemListColor.withOpacity(0.5),
         ),
         errorStyle: TextStyle(
           color: Colors.redAccent,
@@ -64,14 +64,14 @@ class CustomFormField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.firebaseAmber,
+            color: CustomColors.mColorAmber,
             width: 2,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.firebaseGrey.withOpacity(0.5),
+            color: CustomColors.itemListColor.withOpacity(0.5),
           ),
         ),
         errorBorder: OutlineInputBorder(
