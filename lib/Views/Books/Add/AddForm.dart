@@ -53,7 +53,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   Text(
                     'Name',
                     style: TextStyle(
-                      color: CustomColors.itemListColor,
+                      color: CustomColors.textColor,
                       fontSize: 18.0,
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -76,7 +76,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   Text(
                     'Description',
                     style: TextStyle(
-                      color: CustomColors.itemListColor,
+                      color: CustomColors.textColor,
                       fontSize: 18.0,
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -100,7 +100,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   Text(
                     'DataDouble',
                     style: TextStyle(
-                      color: CustomColors.itemListColor,
+                      color: CustomColors.textColor,
                       fontSize: 18.0,
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -125,7 +125,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   Text(
                     'DataInt',
                     style: TextStyle(
-                      color: CustomColors.itemListColor,
+                      color: CustomColors.textColor,
                       fontSize: 18.0,
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -149,7 +149,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   Text(
                     'DataBool',
                     style: TextStyle(
-                      color: CustomColors.itemListColor,
+                      color: CustomColors.textColor,
                       fontSize: 18.0,
                       letterSpacing: 1,
                       fontWeight: FontWeight.bold,
@@ -162,13 +162,13 @@ class _AddItemFormState extends State<AddItemForm> {
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8.0),
                       border: Border.all(
-                        color: CustomColors.itemListColor.withOpacity(0.9),
+                        color: CustomColors.textColor.withOpacity(0.9),
                       ),
                     ),
                     child: Theme(
                       data: ThemeData(
                         //here change to your color
-                        unselectedWidgetColor: CustomColors.itemListColor,
+                        unselectedWidgetColor: CustomColors.textColor,
                       ),
                       child: new Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -187,7 +187,7 @@ class _AddItemFormState extends State<AddItemForm> {
                             'True',
                             style: new TextStyle(
                               fontSize: 16.0,
-                              color: CustomColors.itemListColor,
+                              color: CustomColors.textColor,
                             ),
                           ),
                           new Radio(
@@ -204,7 +204,7 @@ class _AddItemFormState extends State<AddItemForm> {
                             'False',
                             style: new TextStyle(
                                 fontSize: 16.0,
-                                color: CustomColors.itemListColor),
+                                color: CustomColors.textColor),
                           ),
                         ],
                       ),

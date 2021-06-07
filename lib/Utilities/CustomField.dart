@@ -57,7 +57,7 @@ class CustomFormField extends StatelessWidget {
         labelStyle: TextStyle(color: CustomColors.secondColor),
         hintText: _hint,
         hintStyle: TextStyle(
-          color: CustomColors.itemListColor,
+          color: CustomColors.textColor,
         ),
         errorStyle: TextStyle(
           color: Colors.redAccent,
@@ -73,7 +73,7 @@ class CustomFormField extends StatelessWidget {
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.itemListColor.withOpacity(0.9),
+            color: CustomColors.textColor.withOpacity(0.9),
           ),
         ),
         errorBorder: OutlineInputBorder(
