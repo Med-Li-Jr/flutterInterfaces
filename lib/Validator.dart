@@ -18,4 +18,24 @@ class Validator {
 
     return null;
   }
+
+  static String validateFieldNumber({@required String value, @required String typeField}) {
+    if (value.isEmpty) {
+      return 'Field can\'t be empty';
+    }
+    bool hasError = false;
+    switch (typeField){
+      case "double":
+        hasError = double.tryParse(value) == null ? true : false;
+      break;
+      case "int":
+        hasError = int.tryParse(value) == null ? true : false;
+      break;
+    }
+
+    if(hasError)
+      return 'Value ' + value + " is not a type of " + typeField;
+
+    return null;
+  }
 }

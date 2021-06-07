@@ -61,12 +61,14 @@ class AddScreen extends StatelessWidget {
                   ),
                 ),
                 SizedBox(height: 25),
-                AddItemForm(
-                  nameFocusNode: _nameFocusNode,
-                  descriptionFocusNode: _descriptionFocusNode,
-                  dataDoubleFocusNode: _dataDoubleFocusNode,
-                  dataIntFocusNode: _dataIntFocusNode,
-                  dataBoolFocusNode: _dataBoolFocusNode,
+                Expanded(
+                  child: AddItemForm(
+                    nameFocusNode: _nameFocusNode,
+                    descriptionFocusNode: _descriptionFocusNode,
+                    dataDoubleFocusNode: _dataDoubleFocusNode,
+                    dataIntFocusNode: _dataIntFocusNode,
+                    dataBoolFocusNode: _dataBoolFocusNode,
+                  ),
                 ),
               ],
             ),
