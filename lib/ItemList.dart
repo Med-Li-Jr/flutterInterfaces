@@ -14,6 +14,27 @@ class ItemList extends StatelessWidget {
         if (snapshot.hasError) {
           return Text('Something went wrong');
         } else if (snapshot.hasData || snapshot.data != null) {
+          if (snapshot.data.docs.length == 0) {
+            return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  child: Image.asset(
+                    'images/noDataFoundIcons.png',
+                  ),
+                  width: 500,
+                ),
+                SizedBox(
+                  child: Text(
+                    'There is no data in the database',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  ),
+                ),
+              ],
+            );
+          }
           return ListView.separated(
             separatorBuilder: (context, index) => SizedBox(height: 16.0),
             itemCount: snapshot.data.docs.length,
