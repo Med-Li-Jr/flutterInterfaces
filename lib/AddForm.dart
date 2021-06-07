@@ -35,7 +35,6 @@ class _AddItemFormState extends State<AddItemForm> {
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _dataDoubleController = TextEditingController();
   final TextEditingController _dataIntController = TextEditingController();
-  final TextEditingController _dataBoolController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +100,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   ),
                   SizedBox(height: 18.0),
                   Text(
-                    'dataDouble',
+                    'DataDouble',
                     style: TextStyle(
                       color: CustomColors.itemListColor,
                       fontSize: 18.0,
@@ -128,7 +127,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   
                   SizedBox(height: 18.0),
                   Text(
-                    'dataInt',
+                    'DataInt',
                     style: TextStyle(
                       color: CustomColors.itemListColor,
                       fontSize: 18.0,
@@ -155,7 +154,7 @@ class _AddItemFormState extends State<AddItemForm> {
 
 
                   Text(
-                    'dataBool ' + _radioDataBool.toString(),
+                    'DataBool',
                     style: TextStyle(
                       color: CustomColors.itemListColor,
                       fontSize: 18.0,
@@ -178,7 +177,7 @@ class _AddItemFormState extends State<AddItemForm> {
                   //   hint: 'Enter your note data bool',
                   // ),
                   new Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                    mainAxisAlignment: MainAxisAlignment.start,
                     children: <Widget>[
                       new Radio(
                         value: true,

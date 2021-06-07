@@ -19,8 +19,10 @@ class EditScreen extends StatefulWidget {
 
 class _EditScreenState extends State<EditScreen> {
   final FocusNode _nameFocusNode = FocusNode();
-
   final FocusNode _descriptionFocusNode = FocusNode();
+  final FocusNode _dataDoubleFocusNode = FocusNode();
+  final FocusNode _dataIntFocusNode = FocusNode();
+  final FocusNode _dataBoolFocusNode = FocusNode();
 
   bool _isDeleting = false;
 
@@ -30,12 +32,15 @@ class _EditScreenState extends State<EditScreen> {
       onTap: () {
         _nameFocusNode.unfocus();
         _descriptionFocusNode.unfocus();
+        _dataDoubleFocusNode.unfocus();
+        _dataIntFocusNode.unfocus();
+        _dataBoolFocusNode.unfocus();
       },
       child: Scaffold(
         backgroundColor: CustomColors.primaryColor,
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: CustomColors.primaryColor,
+          backgroundColor: CustomColors.secondColor,
           title: AppBarTitle(),
           actions: [
             _isDeleting
@@ -55,7 +60,7 @@ class _EditScreenState extends State<EditScreen> {
                 : IconButton(
                     icon: Icon(
                       Icons.delete,
-                      color: Colors.redAccent,
+                      color: Colors.red[900],
                       size: 32,
                     ),
                     onPressed: () async {
@@ -79,6 +84,7 @@ class _EditScreenState extends State<EditScreen> {
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.only(
+              top: 15,
               left: 16.0,
               right: 16.0,
               bottom: 20.0,
@@ -86,6 +92,9 @@ class _EditScreenState extends State<EditScreen> {
             child: EditItemForm(
               nameFocusNode: _nameFocusNode,
               descriptionFocusNode: _descriptionFocusNode,
+              dataDoubleFocusNode: _dataDoubleFocusNode,
+              dataIntFocusNode: _dataIntFocusNode,
+              dataBoolFocusNode: _dataBoolFocusNode,
               currentGuestbook: widget.currentGuestBook,
             ),
           ),

@@ -7,6 +7,10 @@ class CustomColors {
   static final Color itemListColor = Color(0xFFECEFF1);
   static final Color mColorAmber = Color(0xFFFFA000);
   static final Color mColorYellow = Color(0xFFFFCA28);
+
+  static final Color mColorBtnCancel = Colors.red[900];
+  static final Color mColorBtnSucces = Colors.green[800];
+
   // static final Color firebaseNavy = Color(0xFF2C384A);
   // static final Color firebaseOrange = Color(0xFFF57C00);
   // static final Color firebaseAmber = Color(0xFFFFA000);
