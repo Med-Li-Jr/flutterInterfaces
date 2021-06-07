@@ -73,8 +73,8 @@ class ItemList extends StatelessWidget {
 
               return Ink(
                 decoration: BoxDecoration(
-                  color: CustomColors.itemListColor, // version 1 orange blanc
-                  // color: CustomColors.itemListColor.withOpacity(0.2), // version 2 bleu navy
+                  // color: CustomColors.itemListColor, // version 1 orange blanc
+                  color: CustomColors.itemListColor.withOpacity(0.2), // version 2 bleu navy
                   borderRadius: BorderRadius.circular(7.0),
                 ),
                 child: ListTile(

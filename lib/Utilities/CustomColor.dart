@@ -17,9 +17,9 @@ Version 1 Orange Blanc
 
 */
 
-  static final Color itemListColor = Color(0xFF2C384A);
-  static final Color mColorTextEdit = Colors.black;
-  static final Color primaryColor = Colors.white;
+  // static final Color itemListColor = Color(0xFF2C384A);
+  // static final Color mColorTextEdit = Colors.black;
+  // static final Color primaryColor = Colors.white;
 
 /*
 
@@ -27,9 +27,9 @@ Version 2 Bleu Navy
 
 */
 
-  // static final Color primaryColor = Color(0xFF2C384A);
-  // static final Color mColorTextEdit = Colors.white;
-  // static final Color itemListColor = Color(0xFFECEFF1);
+  static final Color primaryColor = Color(0xFF2C384A);
+  static final Color mColorTextEdit = Colors.white;
+  static final Color itemListColor = Color(0xFFECEFF1);
 
 
 }
