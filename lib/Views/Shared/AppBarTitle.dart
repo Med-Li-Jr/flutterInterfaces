@@ -14,7 +14,7 @@ class AppBarTitle extends StatelessWidget {
             Text(
               'FlutterFire CRUD',
               style: TextStyle(
-                color: CustomColors.primaryColor,
+                color: CustomColors.thirdColor,
                 fontSize: 28,
               ),
             ),

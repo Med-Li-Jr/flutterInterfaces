@@ -321,7 +321,7 @@ class _EditItemFormState extends State<EditItemForm> {
                                   style: TextStyle(
                                     fontSize: 21,
                                     fontWeight: FontWeight.bold,
-                                    color: CustomColors.primaryColor,
+                                    color: CustomColors.thirdColor,
                                   ),
                                 ),
                               ),

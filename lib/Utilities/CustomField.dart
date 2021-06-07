@@ -50,7 +50,7 @@ class CustomFormField extends StatelessWidget {
       textInputAction: _inputAction,
       cursorColor: CustomColors.secondColor,
       validator: (value) => _validator(value),
-      style: TextStyle(color: Colors.black),
+      style: TextStyle(color: CustomColors.mColorTextEdit),
       decoration: InputDecoration(
         
         labelText: isLabelEnabled ? _label : null,
