@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:flutter_interfaces/CustomColor.dart';
+import 'package:flutter_interfaces/Utilities/CustomColor.dart';
 
 class CustomFormField extends StatelessWidget {
   const CustomFormField({
@@ -48,14 +48,16 @@ class CustomFormField extends StatelessWidget {
       textCapitalization:
           isCapitalized ? TextCapitalization.words : TextCapitalization.none,
       textInputAction: _inputAction,
-      cursorColor: CustomColors.mColorYellow,
+      cursorColor: CustomColors.secondColor,
       validator: (value) => _validator(value),
+      style: TextStyle(color: Colors.black),
       decoration: InputDecoration(
+        
         labelText: isLabelEnabled ? _label : null,
-        labelStyle: TextStyle(color: CustomColors.mColorYellow),
+        labelStyle: TextStyle(color: CustomColors.secondColor),
         hintText: _hint,
         hintStyle: TextStyle(
-          color: CustomColors.itemListColor.withOpacity(0.5),
+          color: CustomColors.itemListColor,
         ),
         errorStyle: TextStyle(
           color: Colors.redAccent,
@@ -64,14 +66,14 @@ class CustomFormField extends StatelessWidget {
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.mColorAmber,
+            color: CustomColors.secondColor,
             width: 2,
           ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(8.0),
           borderSide: BorderSide(
-            color: CustomColors.itemListColor.withOpacity(0.5),
+            color: CustomColors.itemListColor.withOpacity(0.9),
           ),
         ),
         errorBorder: OutlineInputBorder(

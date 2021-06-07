@@ -1,10 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_interfaces/CustomColor.dart';
-import 'package:flutter_interfaces/CustomField.dart';
-import 'package:flutter_interfaces/DatabaseFB.dart';
-import 'package:flutter_interfaces/GuestBook.dart';
-import 'package:flutter_interfaces/Validator.dart';
+import 'package:flutter_interfaces/Controller/BooksController.dart';
+import 'package:flutter_interfaces/Utilities/CustomColor.dart';
+import 'package:flutter_interfaces/Utilities/CustomField.dart';
+import 'package:flutter_interfaces/Modal/Enitities/GuestBook.dart';
+import 'package:flutter_interfaces/Utilities/Validator.dart';
 
 class EditItemForm extends StatefulWidget {
   final FocusNode nameFocusNode;
@@ -88,16 +87,23 @@ class _EditItemFormState extends State<EditItemForm> {
           _isProcessing = true;
         });
 
-        await Database.deleteItem(
-          guestbookId: widget.currentGuestbook.bookId,
-        );
+        String resp = await BooksController.supprimerDonnees(
+            widget.currentGuestbook.bookId);
 
         setState(() {
           _isProcessing = false;
         });
-
-        Navigator.of(context).pop();
-        Navigator.of(context).pop();
+        if (resp != null) {
+          // ScaffoldMessenger.
+          ScaffoldMessenger(
+            child: SnackBar(
+              content: Text(resp),
+            ),
+          );
+        } else {
+          Navigator.of(context).pop();
+          Navigator.of(context).pop();
+        }
       },
     );
 
@@ -136,7 +142,6 @@ class _EditItemFormState extends State<EditItemForm> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  SizedBox(height: 18.0),
                   Text(
                     'Name',
                     style: TextStyle(
@@ -193,7 +198,6 @@ class _EditItemFormState extends State<EditItemForm> {
                     ),
                   ),
                   SizedBox(height: 7.0),
-
                   CustomFormField(
                     maxLines: 1,
                     isLabelEnabled: false,
@@ -206,7 +210,6 @@ class _EditItemFormState extends State<EditItemForm> {
                     label: 'Data Double',
                     hint: 'Enter your note data double',
                   ),
-
                   SizedBox(height: 18.0),
                   Text(
                     'DataInt',
@@ -231,7 +234,6 @@ class _EditItemFormState extends State<EditItemForm> {
                     hint: 'Enter your note data int',
                   ),
                   SizedBox(height: 18.0),
-
                   Text(
                     'DataBool',
                     style: TextStyle(
@@ -242,51 +244,57 @@ class _EditItemFormState extends State<EditItemForm> {
                     ),
                   ),
                   SizedBox(height: 7.0),
-                  // CustomFormField(
-                  //   maxLines: 1,
-                  //   isLabelEnabled: false,
-                  //   controller: _dataBoolController,
-                  //   focusNode: widget.dataBoolFocusNode,
-                  //   keyboardType: TextInputType.text,
-                  //   inputAction: TextInputAction.done,
-                  //   validator: (value) => Validator.validateField(
-                  //     value: value,
-                  //   ),
-                  //   label: 'Data Bool',
-                  //   hint: 'Enter your note data bool',
-                  // ),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      new Radio(
-                        value: true,
-                        groupValue: _radioDataBool,
-                        onChanged: (value) {
-                          setState(() {
-                            _radioDataBool = value;
-                          });
-                        },
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: CustomColors.itemListColor.withOpacity(0.9),
                       ),
-                      new Text(
-                        'True',
-                        style: new TextStyle(fontSize: 16.0),
+                    ),
+                    child: Theme(
+                      data: ThemeData(
+                        //here change to your color
+                        unselectedWidgetColor: CustomColors.itemListColor,
                       ),
-                      new Radio(
-                        value: false,
-                        groupValue: _radioDataBool,
-                        onChanged: (value) {
-                          setState(() {
-                            _radioDataBool = value;
-                          });
-                        },
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          new Radio(
+                            value: true,
+                            groupValue: _radioDataBool,
+                            activeColor: CustomColors.secondColor,
+                            onChanged: (value) {
+                              setState(() {
+                                _radioDataBool = value;
+                              });
+                            },
+                          ),
+                          new Text(
+                            'True',
+                            style: new TextStyle(
+                              fontSize: 16.0,
+                              color: CustomColors.itemListColor,
+                            ),
+                          ),
+                          new Radio(
+                            value: false,
+                            groupValue: _radioDataBool,
+                            activeColor: CustomColors.secondColor,
+                            onChanged: (value) {
+                              setState(() {
+                                _radioDataBool = value;
+                              });
+                            },
+                          ),
+                          new Text(
+                            'False',
+                            style: new TextStyle(
+                                fontSize: 16.0,
+                                color: CustomColors.itemListColor),
+                          ),
+                        ],
                       ),
-                      new Text(
-                        'False',
-                        style: new TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -308,7 +316,7 @@ class _EditItemFormState extends State<EditItemForm> {
                         bottom: 24.0,
                       ),
                       child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           SizedBox(
                             width: 150,
@@ -334,26 +342,41 @@ class _EditItemFormState extends State<EditItemForm> {
 
                                   widget.currentGuestbook.name =
                                       _nameController.text;
+
                                   widget.currentGuestbook.description =
                                       _descriptionController.text;
+
                                   widget.currentGuestbook.dataDouble =
                                       double.parse(_dataDoubleController.text);
+
                                   widget.currentGuestbook.dataInt =
                                       int.parse(_dataIntController.text);
+
                                   widget.currentGuestbook.dataBool =
                                       _radioDataBool;
+
                                   widget.currentGuestbook.timestamp =
                                       DateTime.now()
                                           .millisecondsSinceEpoch
                                           .toString();
-                                  await Database.updateItem(
-                                      widget.currentGuestbook);
+
+                                  String resp =
+                                      await BooksController.modifierDonnees(
+                                          widget.currentGuestbook);
 
                                   setState(() {
                                     _isProcessing = false;
                                   });
-
-                                  Navigator.of(context).pop();
+                                  if (resp != null) {
+                                    // ScaffoldMessenger.
+                                    ScaffoldMessenger(
+                                      child: SnackBar(
+                                        content: Text(resp),
+                                      ),
+                                    );
+                                  } else {
+                                    Navigator.of(context).pop();
+                                  }
                                 }
                               },
                               child: Padding(
@@ -363,41 +386,42 @@ class _EditItemFormState extends State<EditItemForm> {
                                   style: TextStyle(
                                     fontSize: 21,
                                     fontWeight: FontWeight.bold,
-                                    color: CustomColors.itemListColor,
+                                    color: CustomColors.primaryColor,
                                   ),
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(
-                            width: 150,
-                            child: ElevatedButton(
-                              style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(
-                                  CustomColors.mColorBtnCancel,
-                                ),
-                                shape: MaterialStateProperty.all(
-                                  RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
-                                  ),
-                                ),
-                              ),
-                              onPressed: () async {
-                                showAlertDialog(context);
-                              },
-                              child: Padding(
-                                padding: EdgeInsets.all(11.0),
-                                child: Text(
-                                  'Delete',
-                                  style: TextStyle(
-                                    fontSize: 21,
-                                    fontWeight: FontWeight.bold,
-                                    color: CustomColors.itemListColor,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
+                          // SizedBox(
+                          //   width: 150,
+                          //   child: ElevatedButton(
+                          //     style: ButtonStyle(
+                          //       backgroundColor: MaterialStateProperty.all(
+                          //         CustomColors.mColorBtnCancel,
+                          //       ),
+                          //       shape: MaterialStateProperty.all(
+                          //         RoundedRectangleBorder(
+                          //           borderRadius: BorderRadius.circular(10),
+                          //         ),
+                          //       ),
+                          //     ),
+                          //     onPressed: () async {
+                          //       showAlertDialog(context);
+                          //     },
+                          //     child: Padding(
+                          //       padding: EdgeInsets.all(11.0),
+                          //       child: Text(
+                          //         'Delete',
+                          //         style: TextStyle(
+                          //           fontSize: 21,
+                          //           fontWeight: FontWeight.bold,
+                          //           color: CustomColors.primaryColor,
+                          //         ),
+                          //       ),
+                          //     ),
+                          //   ),
+                          // ),
+                        
                         ],
                       ),
                     ),

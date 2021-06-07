@@ -1,10 +1,8 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_interfaces/CustomColor.dart';
-import 'package:flutter_interfaces/CustomField.dart';
-import 'package:flutter_interfaces/DatabaseFB.dart';
-import 'package:flutter_interfaces/GuestBook.dart';
-import 'package:flutter_interfaces/Validator.dart';
+import 'package:flutter_interfaces/Controller/BooksController.dart';
+import 'package:flutter_interfaces/Utilities/CustomColor.dart';
+import 'package:flutter_interfaces/Utilities/CustomField.dart';
+import 'package:flutter_interfaces/Utilities/Validator.dart';
 
 class AddItemForm extends StatefulWidget {
   final FocusNode nameFocusNode;
@@ -29,12 +27,12 @@ class _AddItemFormState extends State<AddItemForm> {
   final _addItemFormKey = GlobalKey<FormState>();
 
   bool _isProcessing = false;
-  bool _radioDataBool = true;
 
   final TextEditingController _nameController = TextEditingController();
   final TextEditingController _descriptionController = TextEditingController();
   final TextEditingController _dataDoubleController = TextEditingController();
   final TextEditingController _dataIntController = TextEditingController();
+  bool _radioDataBool = true;
 
   @override
   Widget build(BuildContext context) {
@@ -109,7 +107,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     ),
                   ),
                   SizedBox(height: 7.0),
-                  
+
                   CustomFormField(
                     maxLines: 1,
                     isLabelEnabled: false,
@@ -118,13 +116,11 @@ class _AddItemFormState extends State<AddItemForm> {
                     keyboardType: TextInputType.text,
                     inputAction: TextInputAction.done,
                     validator: (value) => Validator.validateFieldNumber(
-                      value: value,
-                      typeField: "double"
-                    ),
+                        value: value, typeField: "double"),
                     label: 'Data Double',
                     hint: 'Enter your note data double',
                   ),
-                  
+
                   SizedBox(height: 18.0),
                   Text(
                     'DataInt',
@@ -144,14 +140,11 @@ class _AddItemFormState extends State<AddItemForm> {
                     keyboardType: TextInputType.text,
                     inputAction: TextInputAction.done,
                     validator: (value) => Validator.validateFieldNumber(
-                      value: value,
-                      typeField: "int"
-                    ),
+                        value: value, typeField: "int"),
                     label: 'Data Int',
                     hint: 'Enter your note data int',
                   ),
                   SizedBox(height: 18.0),
-
 
                   Text(
                     'DataBool',
@@ -163,51 +156,59 @@ class _AddItemFormState extends State<AddItemForm> {
                     ),
                   ),
                   SizedBox(height: 7.0),
-                  // CustomFormField(
-                  //   maxLines: 1,
-                  //   isLabelEnabled: false,
-                  //   controller: _dataBoolController,
-                  //   focusNode: widget.dataBoolFocusNode,
-                  //   keyboardType: TextInputType.text,
-                  //   inputAction: TextInputAction.done,
-                  //   validator: (value) => Validator.validateField(
-                  //     value: value,
-                  //   ),
-                  //   label: 'Data Bool',
-                  //   hint: 'Enter your note data bool',
-                  // ),
-                  new Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: <Widget>[
-                      new Radio(
-                        value: true,
-                        groupValue: _radioDataBool,
-                        onChanged: (value) {
-                          setState(() {
-                            _radioDataBool = value;
-                          });
-                        },
+
+                  //Pour le Type Boolean
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8.0),
+                      border: Border.all(
+                        color: CustomColors.itemListColor.withOpacity(0.9),
                       ),
-                      new Text(
-                        'True',
-                        style: new TextStyle(fontSize: 16.0),
+                    ),
+                    child: Theme(
+                      data: ThemeData(
+                        //here change to your color
+                        unselectedWidgetColor: CustomColors.itemListColor,
                       ),
-                      new Radio(
-                        value: false,
-                        groupValue: _radioDataBool,
-                        onChanged: (value) {
-                          setState(() {
-                            _radioDataBool = value;
-                          });
-                        },
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: <Widget>[
+                          new Radio(
+                            value: true,
+                            groupValue: _radioDataBool,
+                            activeColor: CustomColors.secondColor,
+                            onChanged: (value) {
+                              setState(() {
+                                _radioDataBool = value;
+                              });
+                            },
+                          ),
+                          new Text(
+                            'True',
+                            style: new TextStyle(
+                              fontSize: 16.0,
+                              color: CustomColors.itemListColor,
+                            ),
+                          ),
+                          new Radio(
+                            value: false,
+                            groupValue: _radioDataBool,
+                            activeColor: CustomColors.secondColor,
+                            onChanged: (value) {
+                              setState(() {
+                                _radioDataBool = value;
+                              });
+                            },
+                          ),
+                          new Text(
+                            'False',
+                            style: new TextStyle(
+                                fontSize: 16.0,
+                                color: CustomColors.itemListColor),
+                          ),
+                        ],
                       ),
-                      new Text(
-                        'False',
-                        style: new TextStyle(
-                          fontSize: 16.0,
-                        ),
-                      ),
-                    ],
+                    ),
                   ),
                 ],
               ),
@@ -222,7 +223,7 @@ class _AddItemFormState extends State<AddItemForm> {
                     ),
                   )
                 : Container(
-                    width: double.maxFinite,
+                    width: 150,
                     child: ElevatedButton(
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all(
@@ -246,37 +247,39 @@ class _AddItemFormState extends State<AddItemForm> {
                             _isProcessing = true;
                           });
 
-                          await Database.addItem(
-                            Guestbook(
-                              userId: "sdf6s51se65",
-                              timestamp: DateTime.now()
-                                  .millisecondsSinceEpoch
-                                  .toString(),
-                              name: _nameController.text,
-                              description: _descriptionController.text,
-                              dataDouble:
-                                  double.parse(_dataDoubleController.text),
-                              dataInt: int.parse(_dataIntController.text),
-                              dataBool: _radioDataBool,
-                            ),
+                          String resp = await BooksController.ajouterBook(
+                            "sdf6s51se65",
+                            DateTime.now().millisecondsSinceEpoch.toString(),
+                            _nameController.text,
+                            _descriptionController.text,
+                            _dataDoubleController.text,
+                            _dataIntController.text,
+                            _radioDataBool,
                           );
 
                           setState(() {
                             _isProcessing = false;
                           });
-
-                          Navigator.of(context).pop();
+                          if (resp != null) {
+                            // ScaffoldMessenger.
+                            ScaffoldMessenger(
+                              child: SnackBar(
+                                content: Text(resp),
+                              ),
+                            );
+                          } else {
+                            Navigator.of(context).pop();
+                          }
                         }
                       },
                       child: Padding(
-                        padding: EdgeInsets.only(top: 16.0, bottom: 16.0),
+                        padding: EdgeInsets.all(11),
                         child: Text(
                           'ADD ITEM',
                           style: TextStyle(
-                            fontSize: 24,
+                            fontSize: 21,
                             fontWeight: FontWeight.bold,
-                            color: CustomColors.itemListColor,
-                            letterSpacing: 2,
+                            color: CustomColors.thirdColor,
                           ),
                         ),
                       ),

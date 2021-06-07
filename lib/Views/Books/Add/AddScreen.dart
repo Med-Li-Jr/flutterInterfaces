@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_interfaces/AddForm.dart';
-import 'package:flutter_interfaces/AppBarTitle.dart';
-import 'package:flutter_interfaces/CustomColor.dart';
+import 'package:flutter_interfaces/Views/Books/Add/AddForm.dart';
+import 'package:flutter_interfaces/Views/Shared/AppBarTitle.dart';
+import 'package:flutter_interfaces/Views/Shared/PathCurrentUI.dart';
+import 'package:flutter_interfaces/Utilities/CustomColor.dart';
 
 class AddScreen extends StatelessWidget {
   final FocusNode _nameFocusNode = FocusNode();
@@ -38,29 +39,10 @@ class AddScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                SizedBox(
-                  child: Row(
-                    children: [
-                      Text(
-                        'Home > ',
-                        style: TextStyle(
-                          // color: CustomColors.primaryColor,
-                          color: CustomColors.thirdColor,
-                          fontSize: 17,
-                        ),
-                      ),
-                      Text(
-                        'Add Book',
-                        style: TextStyle(
-                          // color: CustomColors.primaryColor,
-                          color: CustomColors.secondColor,
-                          fontSize: 17,
-                        ),
-                      ),
-                    ],
-                  ),
+                PathCurrentUI(
+                  fullPath: "Home",
+                  currentPath: "Add Book",
                 ),
-                SizedBox(height: 25),
                 Expanded(
                   child: AddItemForm(
                     nameFocusNode: _nameFocusNode,

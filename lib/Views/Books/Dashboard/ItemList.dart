@@ -1,18 +1,36 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_interfaces/CustomColor.dart';
-import 'package:flutter_interfaces/DatabaseFB.dart';
-import 'package:flutter_interfaces/EditScreen.dart';
-import 'package:flutter_interfaces/GuestBook.dart';
+import 'package:flutter_interfaces/Controller/BooksController.dart';
+import 'package:flutter_interfaces/Utilities/CustomColor.dart';
+import 'package:flutter_interfaces/Views/Books/Detail/EditScreen.dart';
+import 'package:flutter_interfaces/Modal/Enitities/GuestBook.dart';
 
 class ItemList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<QuerySnapshot>(
-      stream: Database.readItems(),
+      stream: BooksController.obtenirLesDonnees(),
       builder: (context, snapshot) {
         if (snapshot.hasError) {
-          return Text('Something went wrong');
+          return Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  child: Image.asset(
+                    'images/errorDataIcons.png',
+                  ),
+                  width: 500,
+                ),
+                SizedBox(
+                  child: Text(
+                    'Something went wrong',
+                    style: TextStyle(
+                      fontSize: 22,
+                    ),
+                  ),
+                ),
+              ],
+            );
         } else if (snapshot.hasData || snapshot.data != null) {
           if (snapshot.data.docs.length == 0) {
             return Column(
@@ -55,7 +73,8 @@ class ItemList extends StatelessWidget {
 
               return Ink(
                 decoration: BoxDecoration(
-                  color: CustomColors.itemListColor.withOpacity(0.1),
+                  color: CustomColors.itemListColor.withOpacity(0.9),
+                  // color: CustomColors.itemListColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(7.0),
                 ),
                 child: ListTile(
@@ -85,7 +104,7 @@ class ItemList extends StatelessWidget {
                         Expanded(
                           child: IconButton(
                             icon: Icon(Icons.edit_rounded),
-                            color: Colors.green[400],
+                            color: CustomColors.secondColor,
                             onPressed: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
