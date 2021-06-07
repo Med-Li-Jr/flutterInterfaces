@@ -13,24 +13,24 @@ class ItemList extends StatelessWidget {
       builder: (context, snapshot) {
         if (snapshot.hasError) {
           return Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                SizedBox(
-                  child: Image.asset(
-                    'images/errorDataIcons.png',
-                  ),
-                  width: 500,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                child: Image.asset(
+                  'images/errorDataIcons.png',
                 ),
-                SizedBox(
-                  child: Text(
-                    'Something went wrong',
-                    style: TextStyle(
-                      fontSize: 22,
-                    ),
+                width: 500,
+              ),
+              SizedBox(
+                child: Text(
+                  'Something went wrong',
+                  style: TextStyle(
+                    fontSize: 22,
                   ),
                 ),
-              ],
-            );
+              ),
+            ],
+          );
         } else if (snapshot.hasData || snapshot.data != null) {
           if (snapshot.data.docs.length == 0) {
             return Column(
@@ -74,7 +74,6 @@ class ItemList extends StatelessWidget {
               return Ink(
                 decoration: BoxDecoration(
                   color: CustomColors.itemListColor.withOpacity(0.9),
-                  // color: CustomColors.itemListColor.withOpacity(0.1),
                   borderRadius: BorderRadius.circular(7.0),
                 ),
                 child: ListTile(
@@ -96,7 +95,9 @@ class ItemList extends StatelessWidget {
                     );
                   },
                   leading: CircleAvatar(
-                      backgroundImage: new AssetImage("images/owl-2.jpg")),
+                    backgroundImage: NetworkImage(
+                        'https://flutter.github.io/assets-for-api-docs/assets/widgets/owl-2.jpg'),
+                  ),
                   trailing: Container(
                     width: 30,
                     child: Row(
@@ -116,47 +117,10 @@ class ItemList extends StatelessWidget {
                             },
                           ),
                         ),
-                        // Expanded(
-                        //   child: IconButton(
-                        //     icon: Icon(Icons.delete_rounded),
-                        //     color: Colors.red[400],
-                        //     onPressed: () {
-                        //       Scaffold.of(context).showSnackBar(
-                        //         SnackBar(
-                        //           content: Text(
-                        //               'delete pressed! ' + currentBook.name),
-                        //         ),
-                        //       );
-                        //     },
-                        //   ),
-                        // ),
                       ],
                     ),
                   ),
                 ),
-
-                //  ListTile(
-                //   shape: RoundedRectangleBorder(
-                //     borderRadius: BorderRadius.circular(7.0),
-                //   ),
-                //   onTap: () => Navigator.of(context).push(
-                //     MaterialPageRoute(
-                //       builder: (context) => EditScreen(
-                //         currentGuestBook: currentBook,
-                //       ),
-                //     ),
-                //   ),
-                //   title: Text(
-                //     currentBook.name,
-                //     maxLines: 1,
-                //     overflow: TextOverflow.ellipsis,
-                //   ),
-                //   subtitle: Text(
-                //     currentBook.text,
-                //     maxLines: 1,
-                //     overflow: TextOverflow.ellipsis,
-                //   ),
-                // ),
               );
             },
           );

@@ -25,8 +25,6 @@ class PathCurrentUI extends StatelessWidget {
                 Text(
                   this.fullPath + ' > ',
                   style: TextStyle(
-                    // color: CustomColors.primaryColor,
-                    // color: CustomColors.thirdColor,
                     color: Colors.black,
                     fontSize: 17,
                   ),
@@ -34,7 +32,6 @@ class PathCurrentUI extends StatelessWidget {
                 Text(
                   this.currentPath,
                   style: TextStyle(
-                    // color: CustomColors.primaryColor,
                     color: CustomColors.secondColor,
                     fontSize: 17,
                   ),

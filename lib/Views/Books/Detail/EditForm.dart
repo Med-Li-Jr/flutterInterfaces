@@ -58,74 +58,6 @@ class _EditItemFormState extends State<EditItemForm> {
     super.initState();
   }
 
-  showAlertDialog(BuildContext context) {
-    // set up the buttons
-    Widget cancelButton = TextButton(
-      child: Text(
-        "Cancel",
-        style: TextStyle(
-          color: CustomColors.secondColor,
-          fontSize: 20,
-        ),
-      ),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-    Widget continueButton = TextButton(
-      child: Text(
-        "Delete",
-        style: TextStyle(
-          color: CustomColors.mColorBtnCancel,
-          fontSize: 21,
-        ),
-      ),
-      onPressed: () async {
-        widget.nameFocusNode.unfocus();
-        widget.descriptionFocusNode.unfocus();
-        setState(() {
-          _isProcessing = true;
-        });
-
-        String resp = await BooksController.supprimerDonnees(
-            widget.currentGuestbook.bookId);
-
-        setState(() {
-          _isProcessing = false;
-        });
-        if (resp != null) {
-          // ScaffoldMessenger.
-          ScaffoldMessenger(
-            child: SnackBar(
-              content: Text(resp),
-            ),
-          );
-        } else {
-          Navigator.of(context).pop();
-          Navigator.of(context).pop();
-        }
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("AlertDialog"),
-      content: Text("Are you sure to delete this Book?"),
-      actions: [
-        continueButton,
-        cancelButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -334,6 +266,9 @@ class _EditItemFormState extends State<EditItemForm> {
                               onPressed: () async {
                                 widget.nameFocusNode.unfocus();
                                 widget.descriptionFocusNode.unfocus();
+                                widget.dataDoubleFocusNode.unfocus();
+                                widget.dataIntFocusNode.unfocus();
+                                widget.dataBoolFocusNode.unfocus();
 
                                 if (_editItemFormKey.currentState.validate()) {
                                   setState(() {
@@ -392,36 +327,6 @@ class _EditItemFormState extends State<EditItemForm> {
                               ),
                             ),
                           ),
-                          // SizedBox(
-                          //   width: 150,
-                          //   child: ElevatedButton(
-                          //     style: ButtonStyle(
-                          //       backgroundColor: MaterialStateProperty.all(
-                          //         CustomColors.mColorBtnCancel,
-                          //       ),
-                          //       shape: MaterialStateProperty.all(
-                          //         RoundedRectangleBorder(
-                          //           borderRadius: BorderRadius.circular(10),
-                          //         ),
-                          //       ),
-                          //     ),
-                          //     onPressed: () async {
-                          //       showAlertDialog(context);
-                          //     },
-                          //     child: Padding(
-                          //       padding: EdgeInsets.all(11.0),
-                          //       child: Text(
-                          //         'Delete',
-                          //         style: TextStyle(
-                          //           fontSize: 21,
-                          //           fontWeight: FontWeight.bold,
-                          //           color: CustomColors.primaryColor,
-                          //         ),
-                          //       ),
-                          //     ),
-                          //   ),
-                          // ),
-                        
                         ],
                       ),
                     ),

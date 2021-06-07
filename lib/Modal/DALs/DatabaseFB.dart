@@ -23,56 +23,7 @@ class Database {
               print(e),
               hasError = true,
             });
-    await _mainCollection
-        .add(data)
-        .whenComplete(() => hasError = false)
-        .catchError((e) => {
-              print(e),
-              hasError = true,
-            });
-    await _mainCollection
-        .add(data)
-        .whenComplete(() => hasError = false)
-        .catchError((e) => {
-              print(e),
-              hasError = true,
-            });
-    await _mainCollection
-        .add(data)
-        .whenComplete(() => hasError = false)
-        .catchError((e) => {
-              print(e),
-              hasError = true,
-            });
-    await _mainCollection
-        .add(data)
-        .whenComplete(() => hasError = false)
-        .catchError((e) => {
-              print(e),
-              hasError = true,
-            });
-    await _mainCollection
-        .add(data)
-        .whenComplete(() => hasError = false)
-        .catchError((e) => {
-              print(e),
-              hasError = true,
-            });
-    await _mainCollection
-        .add(data)
-        .whenComplete(() => hasError = false)
-        .catchError((e) => {
-              print(e),
-              hasError = true,
-            });
-    await _mainCollection
-        .add(data)
-        .whenComplete(() => hasError = false)
-        .catchError((e) => {
-              print(e),
-              hasError = true,
-            });
-
+    
     if (hasError) return "Il y a eu une erreur lors de l'ajout";
 
     return null;

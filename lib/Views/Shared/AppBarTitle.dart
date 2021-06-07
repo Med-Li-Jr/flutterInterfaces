@@ -10,16 +10,11 @@ class AppBarTitle extends StatelessWidget {
         Row(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Image.asset(
-            //   'images/owl-2.jpg',
-            //   height: 30,
-            // ),
-            // SizedBox(width: 8),
+
             Text(
               'FlutterFire CRUD',
               style: TextStyle(
-                // color: CustomColors.primaryColor,
-                color: CustomColors.thirdColor,
+                color: CustomColors.primaryColor,
                 fontSize: 28,
               ),
             ),
