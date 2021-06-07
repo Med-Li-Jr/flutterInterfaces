@@ -59,6 +59,67 @@ class _EditItemFormState extends State<EditItemForm> {
     super.initState();
   }
 
+  showAlertDialog(BuildContext context) {
+    // set up the buttons
+    Widget cancelButton = TextButton(
+      child: Text(
+        "Cancel",
+        style: TextStyle(
+          color: CustomColors.secondColor,
+          fontSize: 20,
+        ),
+      ),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+    Widget continueButton = TextButton(
+      child: Text(
+        "Delete",
+        style: TextStyle(
+          color: CustomColors.mColorBtnCancel,
+          fontSize: 21,
+        ),
+      ),
+      onPressed: () async {
+        widget.nameFocusNode.unfocus();
+        widget.descriptionFocusNode.unfocus();
+        setState(() {
+          _isProcessing = true;
+        });
+
+        await Database.deleteItem(
+          guestbookId: widget.currentGuestbook.bookId,
+        );
+
+        setState(() {
+          _isProcessing = false;
+        });
+
+        Navigator.of(context).pop();
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("AlertDialog"),
+      content: Text("Are you sure to delete this Book?"),
+      actions: [
+        continueButton,
+        cancelButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -322,21 +383,7 @@ class _EditItemFormState extends State<EditItemForm> {
                                 ),
                               ),
                               onPressed: () async {
-                                widget.nameFocusNode.unfocus();
-                                widget.descriptionFocusNode.unfocus();
-                                setState(() {
-                                  _isProcessing = true;
-                                });
-
-                                await Database.deleteItem(
-                                  guestbookId: widget.currentGuestbook.bookId,
-                                );
-
-                                setState(() {
-                                  _isProcessing = false;
-                                });
-
-                                Navigator.of(context).pop();
+                                showAlertDialog(context);
                               },
                               child: Padding(
                                 padding: EdgeInsets.all(11.0),

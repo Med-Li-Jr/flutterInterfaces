@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_interfaces/AppBarTitle.dart';
 import 'package:flutter_interfaces/CustomColor.dart';
@@ -24,7 +23,6 @@ class _EditScreenState extends State<EditScreen> {
   final FocusNode _dataIntFocusNode = FocusNode();
   final FocusNode _dataBoolFocusNode = FocusNode();
 
-  bool _isDeleting = false;
 
   @override
   Widget build(BuildContext context) {
@@ -42,60 +40,51 @@ class _EditScreenState extends State<EditScreen> {
           elevation: 0,
           backgroundColor: CustomColors.secondColor,
           title: AppBarTitle(),
-          actions: [
-            _isDeleting
-                ? Padding(
-                    padding: const EdgeInsets.only(
-                      top: 10.0,
-                      bottom: 10.0,
-                      right: 16.0,
-                    ),
-                    child: CircularProgressIndicator(
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        Colors.redAccent,
-                      ),
-                      strokeWidth: 3,
-                    ),
-                  )
-                : IconButton(
-                    icon: Icon(
-                      Icons.delete,
-                      color: Colors.red[900],
-                      size: 32,
-                    ),
-                    onPressed: () async {
-                      setState(() {
-                        _isDeleting = true;
-                      });
-
-                      await Database.deleteItem(
-                        guestbookId: widget.currentGuestBook.bookId,
-                      );
-
-                      setState(() {
-                        _isDeleting = false;
-                      });
-
-                      Navigator.of(context).pop();
-                    },
-                  ),
-          ],
         ),
         body: SafeArea(
-          child: Padding(
-            padding: const EdgeInsets.only(
-              top: 15,
-              left: 16.0,
-              right: 16.0,
-              bottom: 20.0,
-            ),
-            child: EditItemForm(
-              nameFocusNode: _nameFocusNode,
-              descriptionFocusNode: _descriptionFocusNode,
-              dataDoubleFocusNode: _dataDoubleFocusNode,
-              dataIntFocusNode: _dataIntFocusNode,
-              dataBoolFocusNode: _dataBoolFocusNode,
-              currentGuestbook: widget.currentGuestBook,
+          child: SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(
+                top: 15,
+                left: 16.0,
+                right: 16.0,
+                bottom: 20.0,
+              ),
+              child: Column(
+                children: [
+                  SizedBox(
+                    child: Row(
+                      children: [
+                        Text(
+                          'Home > ',
+                          style: TextStyle(
+                            // color: CustomColors.primaryColor,
+                            color: CustomColors.thirdColor,
+                            fontSize: 17,
+                          ),
+                        ),
+                        Text(
+                          'Detail Book',
+                          style: TextStyle(
+                            // color: CustomColors.primaryColor,
+                            color: CustomColors.secondColor,
+                            fontSize: 17,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                  SizedBox(height: 5),
+                  EditItemForm(
+                    nameFocusNode: _nameFocusNode,
+                    descriptionFocusNode: _descriptionFocusNode,
+                    dataDoubleFocusNode: _dataDoubleFocusNode,
+                    dataIntFocusNode: _dataIntFocusNode,
+                    dataBoolFocusNode: _dataBoolFocusNode,
+                    currentGuestbook: widget.currentGuestBook,
+                  ),
+                ],
+              ),
             ),
           ),
         ),
