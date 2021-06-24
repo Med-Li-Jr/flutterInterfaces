@@ -36,6 +36,17 @@ class Database {
     return _mainCollection.snapshots();
   }
 
+  static Future<QuerySnapshot<Map<String, dynamic>>> readItemsByIdUser(String idUser) async {
+    // CollectionReference GuestBooksItemCollection =
+    //     _mainCollection.doc(userUid).collection('items');
+
+    QuerySnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore.instance 
+        .collection('guestbook')
+        .where('userId', isEqualTo: idUser)
+        .get();
+    return snapshot;
+  }
+
   static Future<String> updateItem(Guestbook guestbook) async {
     // DocumentReference documentReferencer =
     //     _mainCollection.doc(userUid).collection('items').doc(docId);

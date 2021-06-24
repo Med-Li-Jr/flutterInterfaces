@@ -9,6 +9,7 @@ class Guestbook {
   double dataDouble;
   int dataInt;
   bool dataBool;
+  double reste;
 
   Guestbook(
       {this.bookId,
@@ -18,7 +19,8 @@ class Guestbook {
       @required this.name,
       @required this.dataDouble,
       @required this.dataInt,
-      @required this.dataBool});
+      @required this.dataBool,
+      this.reste});
 
   factory Guestbook.fromJson(Map<String, dynamic> json) {
     return Guestbook(
@@ -29,6 +31,7 @@ class Guestbook {
       dataDouble: json['dataDouble'],
       dataInt: json['dataInt'],
       dataBool: json['dataBool'],
+      reste: json['dataDouble'],
     );
   }
 
@@ -41,7 +44,8 @@ class Guestbook {
       'name': name,
       'dataDouble': dataDouble,
       'dataInt': dataInt,
-      'dataBool': dataBool
+      'dataBool': dataBool,
+      'reste': reste,
     };
   }
 }

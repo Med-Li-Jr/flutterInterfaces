@@ -6,8 +6,34 @@ import 'package:flutter_interfaces/Views/Books/Detail/EditScreen.dart';
 import 'package:flutter_interfaces/Modal/Enitities/GuestBook.dart';
 
 class ItemList extends StatelessWidget {
+
   @override
   Widget build(BuildContext context) {
+    
+  showDataSS(QuerySnapshot<Map<String, dynamic>> value) {
+    
+for (var doc in value.docs) {
+      if (doc.data() != null) {
+        print(" ++++++++++++++++++++++++++++++++++++++++++++++  ");
+        Map<String, dynamic> data = doc.data();
+        print(data["name"]);
+        print(" -----------------------------------------  ");
+        // var name = data['name']; // You can get other data in this manner. 
+        // print("----------------------------------------------------------------------------");
+        // print("------------------      " + name + "      ----------------------------------");
+        // print("****************************************************************************");
+        // print(data);
+        // print("----------------------------------------------------------------------------");
+      }
+    }
+  }
+  showData() async {
+
+    Future<QuerySnapshot<Map<String, dynamic>>> allDocUser =  BooksController.obtenirLesDonneesByIdUser("sdf6s51se65");
+      print(" +++++++++++++++++++++++++++++++++++++  ");
+    await allDocUser.then((value) => showDataSS(value));
+      print(" -----------------------------------------  ");
+  }
     return StreamBuilder<QuerySnapshot>(
       stream: BooksController.obtenirLesDonnees(),
       builder: (context, snapshot) {
@@ -32,7 +58,9 @@ class ItemList extends StatelessWidget {
             ],
           );
         } else if (snapshot.hasData || snapshot.data != null) {
+          print(snapshot.data);
           if (snapshot.data.docs.length == 0) {
+            
             return Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -47,12 +75,15 @@ class ItemList extends StatelessWidget {
                     'There is no data in the database',
                     style: TextStyle(
                       fontSize: 22,
+                      color: CustomColors.secondColor,
                     ),
                   ),
                 ),
               ],
             );
           }
+          
+           // showData();
           return ListView.separated(
             separatorBuilder: (context, index) => SizedBox(height: 16.0),
             itemCount: snapshot.data.docs.length,

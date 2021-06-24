@@ -7,6 +7,9 @@ class BooksController {
     return Database.readItems();
   }
 
+  static obtenirLesDonneesByIdUser(String idUser) {
+    return Database.readItemsByIdUser(idUser);
+  }
   static Future<String> ajouterBook(
     String userId,
     String timestamp,
@@ -48,6 +51,7 @@ class BooksController {
           dataDouble: guestbook.dataDouble,
           dataInt: guestbook.dataInt,
           dataBool: guestbook.dataBool,
+          reste: guestbook.reste,
         ),
       );
 
