@@ -7,8 +7,8 @@ class BooksController {
     return Database.readItems();
   }
 
-  static obtenirLesDonneesByIdUser(String idUser) {
-    return Database.readItemsByIdUser(idUser);
+  static obtenirLesDonneesByIdChantier(String idChantier) {
+    return Database.readItemsByIdChantier(idChantier);
   }
   static Future<String> ajouterBook(
     String userId,

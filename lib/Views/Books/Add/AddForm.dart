@@ -341,10 +341,8 @@ class _AddItemFormState extends State<AddItemForm> {
                             String idChantier = "sdf6s51se6";
                             double ancienRestChantier = 0; // tu aura besoin de la valeur du reste actuelle avant l'ajout du nouveau artisan pour pouvoir calculer le nouveau reste
                             double nouveauMontantArtisan = 100; // la valeur du montant du nouveau artisant
-                            
                             //cette ligne en dessous va te retourner un chantier en passant son Id ou key qui doit etre unique et exisatant dans la table Chantier
-                            QuerySnapshot<Map<String, dynamic>> allDocUser = await BooksController.obtenirLesDonneesByIdUser(idChantier);
-                            
+                            QuerySnapshot<Map<String, dynamic>> allDocUser = await BooksController.obtenirLesDonneesByIdChantier(idChantier);                            
                             Guestbook chantier;
                             //cela donne toujours une liste donc on va parcourir a un FOR
                             for (var doc in allDocUser.docs) {
@@ -357,7 +355,6 @@ class _AddItemFormState extends State<AddItemForm> {
                             //on calcule le nouveau reste en prennant l'ancien reste avant ajout du nouveau artisan moins le montant du nouveau artisant
                             double nouveauResteChantier = chantier.reste - nouveauMontantArtisan;
                             chantier.reste = nouveauResteChantier;
-
                             //lorsque tu finir d'ajouter le nouveau artisan et si cela a reussir n'oubli pas de sauvegarder la nouvelle valeur du chantier dans FireBase
                             BooksController.modifierDonnees(chantier);
 

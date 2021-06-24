@@ -36,7 +36,7 @@ class Database {
     return _mainCollection.snapshots();
   }
 
-  static Future<QuerySnapshot<Map<String, dynamic>>> readItemsByIdUser(String idUser) async {
+  static Future<QuerySnapshot<Map<String, dynamic>>> readItemsByIdChantier(String idUser) async {
     // CollectionReference GuestBooksItemCollection =
     //     _mainCollection.doc(userUid).collection('items');
 
